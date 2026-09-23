@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nikkah karogi mujhse?</title>
+
+<style>
+    body {
+        background: #ffe6f2;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 120px;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 40px;
+        color: #d63384;
+        font-weight: bold;
+    }
+
+    #yesBtn, #noBtn {
+        padding: 15px 30px;
+        font-size: 22px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        margin: 20px;
+    }
+
+    #yesBtn {
+        background-color: #ff4d88;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #999;
+        color: white;
+        position: absolute;
+    }
+
+    /* Confetti explosion */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        opacity: 0.9;
+        z-index: 9999;
+        border-radius: 3px;
+        animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+        from { transform: translate(0,0) scale(1); }
+        to {
+            transform: translate(
+                calc((var(--x) * 1px)),
+                calc((var(--y) * 1px))
+            ) scale(0.8);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>Nikkah karogi mujhse?</h1>
+
+<button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
+<button id="noBtn" onmouseover="moveButton()">No 😭</button>
+
+<script>
+function yesClicked() {
+    explodeConfetti();
+
+    // Delay redirect so confetti is visible
+    setTimeout(() => {
+        window.open("https://www.youtube.com/watch?v=lpdRqn6xwiM&start=105", "_blank");
+    }, 1000); // 1 second delay
+}
+
+function moveButton() {
+    const btn = document.getElementById("noBtn");
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 150);
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+function explodeConfetti() {
+    for (let i = 0; i < 150; i++) {
+        let conf = document.createElement("div");
+        conf.className = "confetti";
+
+        conf.style.setProperty('--x', (Math.random() - 0.5) * 800);
+        conf.style.setProperty('--y', (Math.random() - 0.5) * 800);
+
+        conf.style.left = window.innerWidth / 2 + "px";
+        conf.style.top = window.innerHeight / 2 + "px";
+
+        conf.style.backgroundColor = randomColor();
+
+        document.body.appendChild(conf);
+
+        setTimeout(() => conf.remove(), 1200);
+    }
+}
+
+function randomColor() {
+    const colors = ["#ff4d88", "#ffcc00", "#00ccff", "#ff6666", "#66ff66", "#cc99ff"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+</script>
+
+</body>
+</html>
